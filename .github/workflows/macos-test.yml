@@ -40,7 +40,7 @@ jobs:
       - name: Build native Mac test package with ad-hoc signature
         run: |
           pnpm exec vite build --mode desktop
-          pnpm exec electron-builder --config electron-builder.mac.cjs --mac zip --${{ matrix.arch }} --config.mac.identity=- --config.mac.hardenedRuntime=false
+          pnpm exec electron-builder --config electron-builder.mac.cjs --mac zip --${{ matrix.arch }} --config.mac.identity=- --config.mac.hardenedRuntime=false --publish never
       - name: Verify packaged application signature and architecture
         run: |
           mkdir -p release/macos-online/test-results
@@ -59,7 +59,7 @@ jobs:
           NODE_PATH: ${{ runner.temp }}/teacher-test-tools/node_modules
         run: node scripts/verify-desktop-launch.cjs "$RUNNER_TEMP/teacher-app/归途智学教师端.app/Contents/MacOS/归途智学教师端" release/macos-online/test-results
       - name: Verify native whiteboard capture
-        run: 'node_modules/electron/dist/Electron.app/Contents/MacOS/Electron scripts/verify-board-native.cjs --output=release/macos-online/test-results/board-capture.json'
+        run: 'pnpm exec electron scripts/verify-board-native.cjs --output=release/macos-online/test-results/board-capture.json'
       - name: Upload package and test evidence
         if: always()
         uses: actions/upload-artifact@v4
