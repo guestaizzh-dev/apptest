@@ -41,6 +41,7 @@ jobs:
         run: |
           pnpm exec vite build --mode desktop
           pnpm exec electron-builder --config electron-builder.mac.cjs --mac zip --${{ matrix.arch }} --config.mac.identity=- --config.mac.hardenedRuntime=false --publish never
+          python3 scripts/fix-macos-zip-encoding.py release/macos-online/*.zip
       - name: Verify packaged application signature and architecture
         id: signature
         run: |
