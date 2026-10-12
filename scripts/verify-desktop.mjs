@@ -35,9 +35,14 @@ try {
   )
   assert.equal((await fetch(origin + '/missing.png')).status, 404)
   assert.equal(
-    (await fetch(origin + '/..%5cpackage.json')).status,
+    (await fetch(origin + '/..%2fpackage.json')).status,
     403,
-    'Windows 路径不能越过资源目录',
+    '编码斜杠路径不能越过资源目录',
+  )
+  assert.equal(
+    (await fetch(origin + '/..%5cpackage.json')).status,
+    process.platform === 'win32' ? 403 : 404,
+    '反斜杠在 Windows 中是路径分隔符，在 macOS 中是普通文件名字符',
   )
   const response = await fetch(origin + '/api/auth/teacher-login?test=1', {
     method: 'POST',
