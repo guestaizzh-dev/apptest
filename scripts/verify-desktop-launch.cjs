@@ -31,8 +31,25 @@ async function main() {
     await page.getByRole('button', { name: '登录工作台', exact: true }).click()
     assert.equal(await page.locator('#phone').getAttribute('aria-invalid'), 'true')
     const backend = await page.evaluate(async () => {
-      const health = await (await fetch('/api/actuator/health')).json()
-      const courses = await (await fetch('/api/teacher/courses')).json()
+      async function readJson(url) {
+        for (let attempt = 0; attempt < 3; attempt++) {
+          const response = await fetch(url, { signal: AbortSignal.timeout(15000) })
+          const body = await response.text()
+          if ([502, 503, 504].includes(response.status) && attempt < 2) {
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+            continue
+          }
+          try {
+            return JSON.parse(body)
+          } catch {
+            throw new Error(
+              `${url}: HTTP ${response.status}; non-JSON response: ${body.slice(0, 200)}`,
+            )
+          }
+        }
+      }
+      const health = await readJson('/api/actuator/health')
+      const courses = await readJson('/api/teacher/courses')
       return { health: health.status, unauthenticatedCode: courses.code }
     })
     assert.deepEqual(backend, { health: 'UP', unauthenticatedCode: 401 })
