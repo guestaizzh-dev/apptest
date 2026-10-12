@@ -6,7 +6,7 @@
 
 GitHub 的临时签名用于测试，不是 Apple Developer ID 签名，也不包含公证；流程通过不代表下载到老师电脑后会通过 Gatekeeper。云端测试不覆盖真实摄像头、麦克风、操作系统权限授权和师生 ZEGO 通话。参见 [GitHub Mac runner 说明](https://docs.github.com/en/actions/reference/runners/github-hosted-runners)。
 
-当前代码托管在 Gitee，流程尚未在 GitHub 执行。需要先指定 GitHub 私有仓库并授权上传代码，再从该仓库的 Actions 页面手动运行 `macOS build and smoke test`。流程不需要业务密码或 Apple 开发者凭据。
+GitHub 测试仓库为 [guestaizzh-dev/apptest](https://github.com/guestaizzh-dev/apptest)，与原有 Gitee 仓库分开维护。可从 Actions 页面手动运行 `macOS build and smoke test`。流程不需要业务密码或 Apple 开发者凭据，打包明确使用 `--publish never`，只上传测试产物，不发布 GitHub Release。
 
 Intel 使用 `x64`，M 系列使用 `arm64`。两者使用当前桌面页面和 `https://xueerguitu.com/api`，需要正式环境的教师账号。
 
