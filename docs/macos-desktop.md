@@ -10,6 +10,14 @@ GitHub 测试仓库为 [guestaizzh-dev/apptest](https://github.com/guestaizzh-de
 
 Intel 使用 `x64`，M 系列使用 `arm64`。两者使用当前桌面页面和 `https://xueerguitu.com/api`，需要正式环境的教师账号。
 
+## 本次云端验证结果
+
+[Actions 第 5 次运行](https://github.com/guestaizzh-dev/apptest/actions/runs/38204826003)，测试提交 `2f588c00de43b5374394db346fa598bd8fe2f068`，Intel 和 M 系列均通过代码检查、线上 HTTPS 代理、原生构建、架构和 ad-hoc 签名检查、实际 ZIP 内应用启动、登录页交互及独立白板元素采集测试。登录页检查使用空输入，不提交真实教师登录凭据；线上检查覆盖健康接口和未登录时的 401 边界。
+
+测试期间发现并修正 Mac/Windows 路径隔离断言差异、CI 自动发布 Release 引起的打包失败，以及白板测试对 Electron 下载目录的依赖。一次 Intel 请求收到非 JSON 响应，现对临时 502/503/504 网关错误最多请求三次，并在其他非 JSON 响应中记录接口、HTTP 状态和内容摘要；此处理只影响测试脚本，不改变客户端或线上服务。
+
+Actions 产物包括两个架构的 ZIP 和 `test-results` 下的登录页截图、`launch.json`、`board-capture.json`、签名及架构记录。下载后交付文件名包含“云端验证版”，用于区别下文 Windows 生成的旧“未签名”包。
+
 ## 当前 Windows 构建
 
 运行 `npm run desktop:build:mac:unsigned`。脚本需要 Node.js、Python 3.11 及以上、已安装的项目依赖和网络。
@@ -18,9 +26,9 @@ Intel 使用 `x64`，M 系列使用 `arm64`。两者使用当前桌面页面和 
 
 产物在 `release/macos-online`，文件名包含架构及“未签名”。`verification.json` 记录 SHA256、最低系统版本和架构；打包后检查 ZIP 完整性、Mach-O CPU 类型、执行权限、framework 符号链接、业务资源及相机/麦克风用途说明。两个包内的业务资源一致，不包含测试账号、开发服务器或后端密钥。
 
-## 交付限制
+## Windows 生成包的限制
 
-当前没有 Mac 和 Apple Developer ID 证书。这两个 ZIP 是未签名构建产物，未完成 Apple 公证，也未经过 Mac 真机启动验证；不能视为已经能够直接交付老师使用的正式安装包。macOS 可能阻止启动，尤其需要在 Apple Silicon 上完成有效签名验证。请由具备 Mac 的开发人员签名并验证后再分发，不以关闭系统安全检查作为交付方案。
+Windows 脚本生成的“未签名” ZIP 未完成 Apple 签名或公证，不能替代上文在 Mac runner 原生构建并验证的“云端验证版”。云端验证版具备 ad-hoc 签名，仍没有 Apple Developer ID 签名或公证；两类产物均不能据此保证下载后的 Gatekeeper 放行，也没有真实 Mac 媒体设备和师生通话联调结果。正式分发前仍需完成证书签名、公证和实际课堂测试。
 
 ## Mac 本机构建与验证
 
