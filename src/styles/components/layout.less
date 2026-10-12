@@ -1,0 +1,269 @@
+// 教师工作台外壳：左侧导航、顶部账号区和页面容器。
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 17px;
+  border-radius: 10px;
+  text-align: left;
+  color: #8e827b;
+  font-weight: 600;
+  position: relative;
+}
+.sidebar nav a.active {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+.sidebar nav a.active:before {
+  content: '';
+  position: absolute;
+  left: -17px;
+  width: 3px;
+  height: 26px;
+  background: var(--brand);
+  border-radius: 0 4px 4px 0;
+}
+.sidebar {
+  width: 206px;
+  background: #fff;
+  border-right: 1px solid var(--line);
+  position: fixed;
+  inset: 0 auto 0 0;
+  padding: 29px 17px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+.brand {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding: 0 11px;
+  font-weight: 750;
+  font-size: 21px;
+  white-space: nowrap;
+}
+.brand-icon {
+  display: flex;
+  flex-shrink: 0;
+}
+.brand-icon img {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  object-fit: contain;
+}
+.brand small {
+  font-size: 12px;
+  font-weight: 400;
+  display: block;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+.nav-label {
+  font-size: 12px;
+  color: #aea5a0;
+  letter-spacing: 1px;
+  margin: 48px 17px 15px;
+}
+.sidebar nav {
+  display: grid;
+  gap: 8px;
+}
+.nav-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--brand);
+  border-radius: 50%;
+  margin-left: auto;
+}
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 18px 12px;
+}
+.mini-logo {
+  width: 33px;
+  height: 33px;
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.sidebar-bottom strong {
+  font-size: 12px;
+}
+.sidebar-bottom p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  white-space: normal;
+  line-height: 1.7;
+}
+.version {
+  display: block;
+  color: #b5ada9;
+  font-size: 12px;
+  margin-top: 31px;
+}
+.workspace {
+  margin-left: 206px;
+  min-height: 100vh;
+}
+.topbar {
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  gap: 10px;
+}
+.workspace-name {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  font-weight: 650;
+}
+.workspace-divider {
+  width: 1px;
+  height: 16px;
+  background: #e9e7e6;
+}
+.breadcrumb {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.account {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 12px;
+}
+.logout-button {
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  padding: 5px 0 5px 13px;
+  font-size: 12px;
+  white-space: nowrap;
+  &:hover:not(:disabled) {
+    color: var(--brand);
+  }
+}
+.notification {
+  position: relative;
+  margin-left: 3px;
+}
+.notification i {
+  height: 5px;
+  width: 5px;
+  background: #ec7777;
+  position: absolute;
+  right: 6px;
+  top: 5px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+main {
+  padding: 22px 28px 24px;
+  max-width: 1660px;
+  margin: auto;
+}
+@media (max-width: 1190px) {
+  .sidebar {
+    width: 174px;
+    padding: 28px 13px;
+  }
+}
+@media (max-width: 1190px) {
+  .brand {
+    font-size: 18px;
+    padding: 0 8px;
+  }
+}
+@media (max-width: 1190px) {
+  .brand small {
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+}
+@media (max-width: 1190px) {
+  .brand-icon img {
+    width: 28px;
+    height: 28px;
+  }
+}
+@media (max-width: 1190px) {
+  .workspace {
+    margin-left: 174px;
+  }
+}
+@media (max-width: 1190px) {
+  main {
+    padding: 22px 22px 24px;
+  }
+}
+@media (max-width: 1190px) {
+  .topbar {
+    padding: 0 22px;
+  }
+}
+@media (max-width: 960px) {
+  .sidebar {
+    width: 78px;
+    padding: 26px 10px;
+  }
+}
+@media (max-width: 960px) {
+  .brand {
+    justify-content: center;
+    padding: 0;
+  }
+}
+@media (max-width: 960px) {
+  .brand > span:last-child,
+  .nav-title,
+  .nav-label,
+  .sidebar-bottom,
+  .nav-dot {
+    display: none;
+  }
+}
+@media (max-width: 960px) {
+  .sidebar nav {
+    margin-top: 44px;
+  }
+}
+@media (max-width: 960px) {
+  .workspace {
+    margin-left: 78px;
+  }
+}
+@media (max-width: 960px) {
+  .account {
+    gap: 9px;
+  }
+}
+
+.sidebar nav a:hover:not(.active) {
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+.account > span {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 960px) {
+  .sidebar nav a {
+    justify-content: center;
+    padding: 14px 8px;
+  }
+}

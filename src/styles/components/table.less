@@ -1,0 +1,112 @@
+// 课程列表与历史记录共用的表格样式。
+.table-wrap {
+  overflow: auto;
+  min-height: 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  text-align: left;
+  font-size: 13px;
+}
+thead {
+  color: #a39994;
+  background: #fafbfd;
+  font-weight: 400;
+}
+th {
+  font-weight: 500;
+  padding: 15px 17px;
+}
+td {
+  padding: 15px 17px;
+  border-bottom: 1px solid #f5f4f3;
+  color: #897c75;
+}
+td strong {
+  color: #5b534f;
+  font-size: 12px;
+}
+.table-person {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.table-person .avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+}
+.record-row {
+  cursor: pointer;
+}
+.record-row:hover {
+  background: #fcfbfb;
+}
+.record-row.selected {
+  background: var(--brand-soft);
+}
+.record-row.selected td:first-child {
+  box-shadow: inset 3px 0 var(--brand);
+}
+.row-action {
+  font-size: 12px;
+  color: var(--brand);
+  padding: 4px 0;
+}
+.row-action.enter {
+  background: var(--brand-soft);
+  padding: 7px 10px;
+  border-radius: 5px;
+}
+.table-muted {
+  font-size: 12px;
+  color: #aca39e;
+  display: block;
+  margin-top: 5px;
+}
+.list-footer {
+  padding: 15px 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #a39a95;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+td {
+  color: var(--muted);
+}
+td strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+td:nth-child(3) {
+  min-width: 170px;
+  max-width: 300px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.row-action {
+  min-height: 32px;
+}
+.row-action:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.list-footer {
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.record-row:focus-visible {
+  outline: 2px solid var(--brand-focus);
+  outline-offset: -2px;
+}

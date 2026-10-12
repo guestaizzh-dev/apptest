@@ -1,0 +1,154 @@
+// 单次排课详情及终态上课记录。
+.side-panel {
+  padding: 20px;
+}
+.side-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 19px;
+  font-size: 13px;
+}
+.side-heading .caption {
+  font-size: 12px;
+  color: #aba39e;
+}
+.course-title {
+  font-size: 19px;
+  margin-top: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.course-sub {
+  font-size: 12px;
+  color: #a29993;
+  margin-top: 7px;
+}
+.detail-lines {
+  margin: 22px 0 17px;
+  display: grid;
+  gap: 15px;
+}
+.detail-line {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 12px;
+  color: #8c807a;
+}
+.detail-line svg {
+  width: 16px;
+  height: 16px;
+  color: #b4aca7;
+  flex-shrink: 0;
+}
+.detail-line strong {
+  font-weight: 550;
+  color: #605853;
+  display: block;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+.detail-label {
+  font-size: 12px;
+  color: #aba29d;
+}
+.side-action {
+  margin-top: 10px;
+  width: 100%;
+}
+.side-note {
+  text-align: center;
+  font-size: 12px;
+  color: #ada5a0;
+  line-height: 1.8;
+  margin: 11px 0 0;
+}
+.record-total {
+  padding: 15px;
+  background: #fafafa;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 21px 0 10px;
+  font-size: 12px;
+  color: #9a8f89;
+}
+.record-total strong {
+  color: var(--ink);
+  font-size: 23px;
+}
+.record-total small {
+  font-size: 12px;
+  margin-left: 4px;
+  color: #9e948e;
+}
+.record-lines {
+  border-top: 1px solid var(--line);
+  padding-top: 17px;
+}
+.record-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #a39994;
+  margin: 17px 0;
+}
+.record-line strong {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6a615c;
+}
+@media (max-width: 1190px) {
+  .side-panel {
+    padding: 17px;
+  }
+}
+
+.course-title {
+  font-size: 18px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.side-heading .caption,
+.course-sub,
+.side-note,
+.detail-label,
+.record-line {
+  color: var(--muted);
+}
+.detail-line strong,
+.record-line strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+.record-line {
+  gap: 20px;
+}
+.record-line strong {
+  min-width: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.person > div:not(.avatar) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.side-panel {
+  overflow: visible;
+}
+.detail-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  margin: 0 -24px -24px;
+  padding: 14px 24px;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -6px 14px #30242004;
+  .side-action {
+    margin-top: 0;
+  }
+}

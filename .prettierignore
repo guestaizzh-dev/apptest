@@ -1,0 +1,5 @@
+node_modules/
+dist/
+design/
+pnpm-lock.yaml
+baseline.json

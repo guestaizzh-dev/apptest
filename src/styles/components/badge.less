@@ -1,0 +1,40 @@
+// 状态文字与颜色共同表达业务状态。
+.badge {
+  display: inline-block;
+  white-space: nowrap;
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  line-height: 1;
+}
+.badge.ready,
+.badge.live {
+  background: #e4f6ee;
+  color: #178b70;
+}
+.badge.completed {
+  background: #f4f3f2;
+  color: var(--muted);
+}
+.badge.cancelled {
+  background: #f4f3f2;
+  color: var(--muted);
+}
+.badge.missed {
+  background: #fdf0e1;
+  color: #b08039;
+}
+.badge.unbuilt {
+  background: #fff4e5;
+  color: #a97b33;
+}
+.badge.scheduled {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+.badge.unknown {
+  background: #f4f3f2;
+  color: var(--muted);
+}

@@ -1,0 +1,5 @@
+allowBuilds:
+  electron: true
+  electron-winstaller: false
+  protobufjs: false
+  zego-express-engine-webrtc: false

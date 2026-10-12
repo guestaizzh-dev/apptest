@@ -1,0 +1,121 @@
+// 周课时统计卡片，不负责读取或修改课程。
+.stats.compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 16px;
+  .stat {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    gap: 8px;
+    > div:not(.stat-icon) {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+  }
+  .stat-icon,
+  .stat-note {
+    display: none;
+  }
+  .stat-label {
+    margin: 0;
+    color: #887c75;
+    font-size: 12px;
+  }
+  .stat-value {
+    font-size: 18px;
+    font-variant-numeric: tabular-nums;
+  }
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 21px;
+}
+.stat {
+  padding: 17px 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stat-icon {
+  width: 39px;
+  height: 39px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+}
+.stat:nth-child(2) .stat-icon {
+  color: var(--green);
+  background: #eaf7f1;
+}
+.stat:nth-child(3) .stat-icon {
+  color: var(--brand);
+  background: var(--brand-soft);
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.stat-value {
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1;
+}
+.stat-value small {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 5px;
+}
+.stat-note {
+  margin-left: auto;
+  color: #afa6a1;
+  font-size: 12px;
+}
+@media (max-width: 1190px) {
+  .stat {
+    padding: 15px;
+  }
+}
+@media (max-width: 1190px) {
+  .stat-note {
+    display: none;
+  }
+}
+@media (max-width: 960px) {
+  .stats {
+    gap: 10px;
+  }
+}
+@media (max-width: 960px) {
+  .stat {
+    gap: 9px;
+  }
+}
+@media (max-width: 960px) {
+  .stat-icon {
+    width: 33px;
+    height: 33px;
+  }
+}
+@media (max-width: 960px) {
+  .stat-value {
+    font-size: 21px;
+  }
+}
+@media (max-width: 960px) {
+  .stat-label {
+    font-size: 12px;
+  }
+}

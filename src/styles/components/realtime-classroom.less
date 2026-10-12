@@ -1,0 +1,386 @@
+.rtc-classroom {
+  --banner-height: clamp(84px, 7.5vw, 144px);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #292f38;
+  color: #e6e9ef;
+  position: relative;
+}
+.classroom-banner {
+  height: var(--banner-height);
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 18% minmax(0, 1fr) clamp(268px, 24vw, 350px);
+  align-items: center;
+  gap: clamp(12px, 1.5vw, 24px);
+  padding: 8px clamp(16px, 1.6vw, 30px);
+  background: #fffaf5 url('@/assets/classroom/classroom-banner.jpg') center / 100% 100% no-repeat;
+  color: #25262b;
+  position: relative;
+}
+.classroom-brand {
+  height: 100%;
+  min-width: 0;
+}
+.banner-videos {
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 1.25vw, 24px);
+}
+.banner-video {
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  max-width: calc((100% - clamp(12px, 1.25vw, 24px)) / 2);
+  flex-shrink: 1;
+  min-height: 0;
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #eee9e3;
+  border: 1px solid #e7ded5;
+}
+.rtc-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  :deep(video) {
+    width: 100%;
+    height: 100%;
+  }
+}
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #ae9a87;
+  font-size: 11px;
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+.video-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  max-width: 100%;
+  color: #fff;
+  background: #0009;
+  border-top-right-radius: 12px;
+  font-size: 11px;
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  i {
+    width: 5px;
+    height: 10px;
+    border-radius: 3px;
+    background: #52c998;
+  }
+  .muted {
+    opacity: 0.45;
+  }
+}
+.participant-video {
+  position: relative;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+}
+.student-video {
+  display: flex;
+}
+.remote-wait {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #ddd;
+  font-size: 12px;
+  background: #0004;
+}
+.banner-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+}
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #ac9b8e;
+  i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #a8a09a;
+  }
+  &.connected i {
+    background: #47b998;
+  }
+  &.error {
+    color: #b45a48;
+  }
+}
+.banner-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(6px, 0.6vw, 10px);
+  button {
+    border-radius: 50%;
+    width: clamp(33px, 2.4vw, 41px);
+    height: clamp(33px, 2.4vw, 41px);
+    display: grid;
+    place-items: center;
+    background: #f4eee8;
+    color: #33373e;
+    svg {
+      width: 19px;
+      height: 19px;
+    }
+    &.off {
+      background: var(--brand-soft);
+      color: var(--brand);
+    }
+    &.end-class {
+      background: var(--brand);
+      color: #fff;
+    }
+  }
+  .join-class {
+    width: auto;
+    flex-shrink: 0;
+    padding: 0 14px;
+    border-radius: 18px;
+    background: var(--brand);
+    color: #fff;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+}
+.classroom-popover {
+  position: absolute;
+  right: 20px;
+  top: 85%;
+  z-index: 10;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fff;
+  color: #4e5969;
+  border: 1px solid #ece2d8;
+  border-radius: 12px;
+  padding: 17px;
+  box-shadow: 0 12px 30px #0002;
+  font-size: 12px;
+  button {
+    padding: 8px;
+    background: #faf4ed;
+    border-radius: 6px;
+  }
+}
+.course-popover {
+  width: 285px;
+}
+.screen-workspace {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.screen-document-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 24px;
+  height: 48px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #ffffff18;
+  svg {
+    width: 22px;
+    height: 22px;
+    color: #ffb38b;
+  }
+  strong {
+    font-size: 14px;
+  }
+  button {
+    margin-left: auto;
+    background: var(--brand);
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+}
+.screen-stage {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+  background: #171d26;
+  :deep(video) {
+    background: #171d26 !important;
+  }
+}
+.invisible {
+  visibility: hidden;
+}
+.screen-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #c8d0dc;
+  > svg {
+    width: 45px;
+    height: 45px;
+    color: #a08775;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  p {
+    font-size: 12px;
+    color: #8f9aaa;
+  }
+  button {
+    padding: 11px 24px;
+    border-radius: 8px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 13px;
+  }
+}
+.rtc-message {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  max-width: 80%;
+  padding: 12px 20px;
+  font-size: 12px;
+  color: #94624a;
+  background: #fff3e8;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px #0002;
+  button {
+    margin-left: 10px;
+    text-decoration: underline;
+  }
+}
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+@media (max-width: 1200px) {
+  .classroom-banner {
+    gap: 12px;
+    padding: 8px 16px;
+  }
+  .banner-controls {
+    gap: 5px;
+    button {
+      width: 31px;
+      height: 31px;
+    }
+  }
+}
+@media (max-width: 800px) {
+  .classroom-banner {
+    grid-template-columns: 18% minmax(0, 1fr) 238px;
+    gap: 10px;
+    padding: 8px 12px;
+  }
+  .banner-controls {
+    gap: 3px;
+    button {
+      width: 28px;
+      height: 28px;
+    }
+    .join-class {
+      width: auto;
+      padding: 0 10px;
+    }
+  }
+}
+
+.content-focused {
+  --banner-height: 0px;
+}
+.screen-document-bar .return-board {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 0;
+  background: #ffffff09;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.banner-controls button:hover:not(:disabled) {
+  background: #e7ddd4;
+}
+.banner-controls .join-class:hover:not(:disabled),
+.banner-controls .end-class:hover:not(:disabled) {
+  background: var(--brand-hover);
+}
+.classroom-popover {
+  max-height: calc(100dvh - var(--banner-height) - 24px);
+  overflow: auto;
+}
+.classroom-popover button:hover:not(:disabled) {
+  background: #eee5dc;
+}
+.rtc-message {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.screen-document-bar button:hover:not(:disabled),
+.screen-empty button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.video-placeholder {
+  gap: 5px;
+  padding: 5px;
+}
+.video-placeholder span {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.video-placeholder svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}

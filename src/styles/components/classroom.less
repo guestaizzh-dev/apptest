@@ -1,0 +1,108 @@
+.classroom-page {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  height: 100dvh;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #f7f6f5;
+  color: #3c3734;
+  padding: 0;
+}
+.classroom-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  span {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #f3f2f1;
+    color: #90857f;
+  }
+  strong {
+    font-size: 14px;
+  }
+}
+.classroom-detail {
+  color: #81756f;
+  line-height: 1.9;
+  font-size: 13px;
+  margin-top: 16px;
+  p {
+    color: #b3aba6;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+}
+.classroom-dialog {
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  width: 520px;
+  max-width: 94vw;
+  color: var(--ink);
+  box-shadow: 0 25px 80px #38333133;
+}
+.classroom-dialog::backdrop {
+  background: #3b363366;
+  backdrop-filter: blur(3px);
+}
+.dialog-header {
+  padding: 21px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  h2 {
+    font-size: 18px;
+  }
+}
+.dialog-body {
+  padding: 25px;
+}
+.finish-copy {
+  font-size: 13px;
+  color: #978c86;
+  line-height: 1.9;
+  margin-bottom: 25px;
+}
+.dialog-actions {
+  display: flex;
+  gap: 10px;
+  button {
+    flex: 1;
+  }
+}
+@media (max-height: 720px) {
+  .classroom-page {
+    gap: 0;
+    padding-bottom: 0;
+  }
+  .classroom-topbar {
+    min-height: 56px;
+  }
+}
+@media (max-width: 760px) {
+  .classroom-page {
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0;
+  }
+  .classroom-topbar {
+    gap: 12px;
+  }
+  .classroom-topbar > strong {
+    font-size: 15px;
+  }
+  .classroom-back {
+    flex-shrink: 0;
+  }
+  .classroom-heading-note {
+    display: none;
+  }
+}

@@ -1,0 +1,72 @@
+name: macOS build and smoke test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    name: macOS ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel
+            arch: x64
+          - runner: macos-15
+            arch: arm64
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check application and production HTTPS proxy
+        run: |
+          pnpm check
+          node scripts/verify-desktop.mjs --online
+      - name: Build native Mac test package with ad-hoc signature
+        run: |
+          pnpm exec vite build --mode desktop
+          pnpm exec electron-builder --config electron-builder.mac.cjs --mac zip --${{ matrix.arch }} --config.mac.identity=- --config.mac.hardenedRuntime=false
+      - name: Verify packaged application signature and architecture
+        run: |
+          mkdir -p release/macos-online/test-results
+          ditto -x -k "release/macos-online/归途智学教师端-macOS-${{ matrix.arch }}-线上测试版.zip" "$RUNNER_TEMP/teacher-app"
+          APP="$RUNNER_TEMP/teacher-app/归途智学教师端.app"
+          codesign --verify --deep --strict --verbose=2 "$APP"
+          codesign --display --verbose=2 "$APP" 2>&1 | tee release/macos-online/test-results/signature.txt
+          lipo -archs "$APP/Contents/MacOS/归途智学教师端" | tee release/macos-online/test-results/architecture.txt
+          EXPECTED='${{ matrix.arch }}'
+          if [ "$EXPECTED" = x64 ]; then EXPECTED=x86_64; fi
+          test "$(lipo -archs "$APP/Contents/MacOS/归途智学教师端")" = "$EXPECTED"
+      - name: Install isolated smoke-test driver
+        run: npm install --prefix "$RUNNER_TEMP/teacher-test-tools" --no-audit --no-fund --package-lock=false playwright@1.64.0
+      - name: Launch the actual packaged app and check login UI
+        env:
+          NODE_PATH: ${{ runner.temp }}/teacher-test-tools/node_modules
+        run: node scripts/verify-desktop-launch.cjs "$RUNNER_TEMP/teacher-app/归途智学教师端.app/Contents/MacOS/归途智学教师端" release/macos-online/test-results
+      - name: Verify native whiteboard capture
+        run: 'node_modules/electron/dist/Electron.app/Contents/MacOS/Electron scripts/verify-board-native.cjs --output=release/macos-online/test-results/board-capture.json'
+      - name: Upload package and test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: teacher-macos-${{ matrix.arch }}-${{ github.run_number }}
+          path: |
+            release/macos-online/*.zip
+            release/macos-online/test-results/
+          if-no-files-found: warn
+          retention-days: 14
