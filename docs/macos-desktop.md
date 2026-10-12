@@ -18,6 +18,8 @@ Intel 使用 `x64`，M 系列使用 `arm64`。两者使用当前桌面页面和 
 
 Actions 产物包括两个架构的 ZIP 和 `test-results` 下的登录页截图、`launch.json`、`board-capture.json`、签名及架构记录。下载后交付文件名包含“云端验证版”，用于区别下文 Windows 生成的旧“未签名”包。
 
+已补充 `scripts/fix-macos-zip-encoding.py`，修正部分 7-Zip 产物缺失 UTF-8 文件名标记导致 Windows 解压中文乱码的问题。重封装时逐文件核对 SHA256，并保留 Unix 权限和符号链接属性；应用文件和签名内容不变。后续 Actions 在解压、签名检查和启动测试前执行此步骤。Mac `.app` 在 Windows 中显示为文件夹，不能在 Windows 上运行；请传输完整 ZIP 到 Mac 后解压打开。
+
 ## 当前 Windows 构建
 
 运行 `npm run desktop:build:mac:unsigned`。脚本需要 Node.js、Python 3.11 及以上、已安装的项目依赖和网络。
